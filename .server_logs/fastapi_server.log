@@ -1,19 +1,8 @@
-INFO:     Started server process [46830]
+INFO:     Started server process [61184]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:3001 (Press CTRL+C to quit)
-INFO:     49.37.211.159:0 - "GET /weather?q=new+york HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=New+York HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=paris HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=paris HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=paris HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=paris HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=paris HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=paris HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=paris HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=paris HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=paris HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=paris HTTP/1.1" 404 Not Found
-INFO:     49.37.211.159:0 - "GET /weather?q=paris HTTP/1.1" 404 Not Found
 INFO:     49.37.211.159:0 - "GET /weather/current?city=paris HTTP/1.1" 404 Not Found
+INFO:     49.37.211.159:0 - "GET /weather/current?city=New+York HTTP/1.1" 404 Not Found
 INFO:     49.37.211.159:0 - "GET /weather/current?city=paris HTTP/1.1" 404 Not Found
+INFO:     49.37.211.159:0 - "GET /weather/current?city=New+York HTTP/1.1" 404 Not Found
