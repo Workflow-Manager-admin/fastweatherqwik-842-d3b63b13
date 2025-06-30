@@ -101,11 +101,35 @@ async def get_current_weather(
             city=city, lat=lat, lon=lon, units=units
         )
         if not weather_data:
+            # Technically get_current_weather raises errors, but as a fallback
             raise HTTPException(
                 status_code=404,
                 detail="Weather data not found for specified location."
             )
         return weather_data
+    except ValueError as ve:
+        # This is for invalid city or forecast not found
+        raise HTTPException(
+            status_code=404,
+            detail=str(ve)
+        )
+    except RuntimeError as re:
+        # This is for API key errors or upstream service issues
+        msg = str(re)
+        if "API key" in msg:
+            raise HTTPException(
+                status_code=502,
+                detail="Weather backend misconfiguration: " + msg
+            )
+        if "rate limit" in msg:
+            raise HTTPException(
+                status_code=502,
+                detail="Service temporarily unavailable: rate limit exceeded. Try again later."
+            )
+        raise HTTPException(
+            status_code=502,
+            detail="Weather backend error: " + msg
+        )
     except HTTPException:
         raise
     except Exception as exc:
@@ -165,11 +189,33 @@ async def get_forecast(
             city=city, lat=lat, lon=lon, units=units
         )
         if not forecast_data:
+            # As a fallback if forecast is empty, but proper exceptions should fire before
             raise HTTPException(
                 status_code=404,
                 detail="Forecast data not found for specified location."
             )
         return forecast_data
+    except ValueError as ve:
+        raise HTTPException(
+            status_code=404,
+            detail=str(ve)
+        )
+    except RuntimeError as re:
+        msg = str(re)
+        if "API key" in msg:
+            raise HTTPException(
+                status_code=502,
+                detail="Weather backend misconfiguration: " + msg
+            )
+        if "rate limit" in msg:
+            raise HTTPException(
+                status_code=502,
+                detail="Service temporarily unavailable: rate limit exceeded. Try again later."
+            )
+        raise HTTPException(
+            status_code=502,
+            detail="Weather backend error: " + msg
+        )
     except HTTPException:
         raise
     except Exception as exc:

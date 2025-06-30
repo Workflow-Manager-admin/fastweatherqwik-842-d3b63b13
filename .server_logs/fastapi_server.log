@@ -12,3 +12,5 @@ INFO:     100.64.4.167:45832 - "GET /docs HTTP/1.1" 200 OK
 INFO:     100.64.4.167:45838 - "GET /docs HTTP/1.1" 200 OK
 INFO:     100.64.4.167:45852 - "GET /openapi.json HTTP/1.1" 200 OK
 INFO:     100.64.4.167:45860 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     49.37.211.159:0 - "GET /weather?q=new+york HTTP/1.1" 404 Not Found
+INFO:     49.37.211.159:0 - "GET /weather?q=New+York HTTP/1.1" 404 Not Found
