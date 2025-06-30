@@ -6,8 +6,11 @@ Includes error handling and transformation to internal schemas.
 import os
 import httpx
 from typing import Optional, Tuple
+from dotenv import load_dotenv
 
 from .schemas import WeatherResponse, ForecastResponse
+
+load_dotenv()
 
 OPENWEATHERMAP_API_KEY = os.getenv("OPENWEATHERMAP_API_KEY")
 OPENWEATHERMAP_BASE_URL = "https://api.openweathermap.org/data/2.5"
@@ -16,16 +19,25 @@ OPENWEATHERMAP_ONECALL_URL = "https://api.openweathermap.org/data/3.0/onecall"
 
 def get_api_key():
     """
-    Retrieve OpenWeatherMap API key from environment for security.
-    Raises:
-        RuntimeError: If API key is not set.
+    PUBLIC_INTERFACE
+
+    Retrieve the OpenWeatherMap API key from environment variables—never hardcoded.
+
+    - On local development: Loads from `.env` if present (auto via `python-dotenv`).
+      - Example: .env contains OPENWEATHERMAP_API_KEY=your_api_key
+    - On production: Should be provided as an environment variable.
+    - Raises:
+        RuntimeError: If the API key is missing or unset.
+
+    Returns:
+        str: The OpenWeatherMap API key for all requests.
     """
     key = OPENWEATHERMAP_API_KEY or os.environ.get("OPENWEATHERMAP_API_KEY")
     if not key:
         raise RuntimeError(
-            "OpenWeatherMap API key is not set in the environment variable "
-            "'OPENWEATHERMAP_API_KEY'. "
-            "Please set it to use weather functionality."
+            "OpenWeatherMap API key is not set in environment variable 'OPENWEATHERMAP_API_KEY'. "
+            "Set this variable in your deployment environment or add an entry to a local .env file "
+            "for development."
         )
     return key
 
